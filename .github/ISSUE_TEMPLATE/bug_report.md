@@ -1,38 +1,30 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: "[BACK OU FRONT] titulo"
+labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## 🐛 Descrição do Problema
+Descreva o bug encontrado de forma clara e concisa.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## 📌 Passos para Reproduzir
+1. Vá para '...'
+2. Clique em '...'
+3. Veja o erro '...'
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## ⚠️ Comportamento Esperado
+Descreva o que deveria acontecer.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## 🖥️ Ambiente
+- Sistema Operacional: [Windows/Linux/Mac]
+- Navegador/Versão: [Chrome, Firefox, Edge, etc.]
+- Versão do Projeto: [exemplo: v1.0.3]
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## 📸 Capturas de Tela (se aplicável)
+Adicione imagens ou vídeos, se possível.
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+## 📝 Informações Adicionais
+Se houver mais detalhes relevantes, adicione aqui.
