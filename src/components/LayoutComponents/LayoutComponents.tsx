@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Footer } from "../footer/Footer";
 
 interface LayoutComponentsProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ export const LayoutComponents = ({ children }: LayoutComponentsProps) => {
       <div className="w-full min-h-screen flex flex-wrap items-center justify-center p-4">
         {children}
       </div>
+      <Footer />
     </div>
   );
 };
