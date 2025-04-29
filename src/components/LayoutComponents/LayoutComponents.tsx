@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Footer } from "../footer/Footer";
+import { Navbar } from "../Header/Navbar";
 
 interface LayoutComponentsProps {
   children: ReactNode;
@@ -8,6 +9,7 @@ interface LayoutComponentsProps {
 export const LayoutComponents = ({ children }: LayoutComponentsProps) => {
   return (
     <div className="bg-gray-900 bg-[url('')] bg-cover bg-center">
+      <Navbar />
       <div className="w-full min-h-screen flex flex-wrap items-center justify-center p-4">
         {children}
       </div>
