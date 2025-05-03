@@ -227,7 +227,7 @@ export const Register = () => {
               htmlFor="masterConfirm"
               className="block leading-tight text-white"
             >
-              Desejo ser Mestre
+              Desejo Mestrar
             </label>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-300 mt-[-12px] pl-7 whitespace-normal">
