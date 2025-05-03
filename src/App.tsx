@@ -1,3 +1,4 @@
+import { AuthProvider } from "./context/auth";
 import "./global.css";
 import { AppRouter } from "./routes/AppRouter";
 import { useEffect } from "react";
@@ -8,5 +9,5 @@ export const App = () => {
     fetch("")
   }, []);
 
-  return <AppRouter />;
+  return <AuthProvider><AppRouter /></AuthProvider>;
 };
