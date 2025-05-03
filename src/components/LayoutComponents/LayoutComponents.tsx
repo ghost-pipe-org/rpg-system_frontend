@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { Footer } from "../footer/Footer";
+import { Footer } from "../Footer/Footer";
 import { Navbar } from "../Header/Navbar";
+import "../../global.css";
 
 interface LayoutComponentsProps {
   children: ReactNode;
@@ -8,11 +9,18 @@ interface LayoutComponentsProps {
 
 export const LayoutComponents = ({ children }: LayoutComponentsProps) => {
   return (
-    <div className="bg-gray-900 bg-[url('')] bg-cover bg-center">
+    <div
+      className="flex flex-col w-full h-full min-h-screen bg-[url('/bg_art.png')] bg-cover bg-center "
+      style={{
+        backgroundImage:
+          "linear-gradient(to top, rgba(28, 28, 42, 0.8), rgba(46, 41, 132, 0.8)), url('/bg_art.png')",
+        backgroundBlendMode: "multiply",
+      }}
+    >
       <Navbar />
-      <div className="w-full min-h-screen flex flex-wrap items-center justify-center p-4">
+      <main className="flex-1 w-full flex items-center justify-center p-4">
         {children}
-      </div>
+      </main>
       <Footer />
     </div>
   );
