@@ -2,7 +2,7 @@
 
 <Por favor descreva todas as mudanças realizadas e problemas endereçados. Além disso, inclua também toda motivação e/ou contexto relevante, listando toda dependência que estiver diretamente envolvida com as mudanças realizadas.>
 
-Essa PR endereça a tarefa #<task id>
+Essa PR <closes #issue_number> , <closes #issue_number>...
 
 Essa PR tem como dependências as tarefas #<task id>, #<task id>, #<task id>...
 
@@ -18,6 +18,9 @@ Marque o tipo de alterações realizadas:
 ## Como Testar
 
 <Por favor, descreva quaisquer instruções relevantes para executar, testar e verificar as mudanças feitas.>
+
+npm i --para instalar dependências
+npm run dev --para rodar o projeto
 
 ## Checklist
 
