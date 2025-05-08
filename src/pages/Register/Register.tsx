@@ -3,6 +3,7 @@ import { LayoutComponents } from "../../components/LayoutComponents/LayoutCompon
 import { LabeledInput } from "../../components/LabeledInput/LabeledInput";
 import { Button } from "../../components/Button/Button";
 import {Title} from "../../components/Title/Title";
+import { api } from "../../services/api";
 
 interface FormData {
   username: string;
@@ -115,6 +116,30 @@ export const Register = () => {
     return true;
   };
 
+  const handleSaveUser = async (user: FormData) => {
+    const userData = {
+      username: user.username.trim(),
+      phoneNumber: user.phoneNumber.replace(/\D/g, ""),
+      email: user.email.trim(),
+      masterConfirm: user.masterConfirm,
+      enrollment: user.enrollment.replace(/\D/g, ""),
+      password: user.password
+    };
+
+    const response = await api.post("/users", userData);
+    if (response.status !== 201) {
+      throw new Error("Erro ao salvar usuário");
+    }
+    console.log("Dados enviados:", {
+      username: formData.username.trim(),
+      phoneNumber: formData.phoneNumber.replace(/\D/g, ""),
+      email: formData.email.trim(),
+      masterConfirm: formData.masterConfirm,
+      enrollment: formData.enrollment.replace(/\D/g, ""),
+    });
+    return response.data;
+  };
+
   const submitForm = async (): Promise<void> => {
     if (isSubmitting) return;
     if (!validateForm()) return;
@@ -123,13 +148,7 @@ export const Register = () => {
     try {
       await new Promise<void>((resolve) => setTimeout(resolve, 1500));
 
-      console.log("Dados enviados:", {
-        username: formData.username.trim(),
-        phoneNumber: formData.phoneNumber.replace(/\D/g, ""),
-        email: formData.email.trim(),
-        masterConfirm: formData.masterConfirm,
-        enrollment: formData.enrollment.replace(/\D/g, ""),
-      });
+      await handleSaveUser(formData);
 
       alert("Cadastro realizado com sucesso!");
       
