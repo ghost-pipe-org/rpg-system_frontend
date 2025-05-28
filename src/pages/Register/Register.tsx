@@ -118,7 +118,7 @@ export const Register = () => {
 
   const handleSaveUser = async (user: FormData) => {
     const userData = {
-      username: user.username.trim(),
+      name: user.username.trim(),
       phoneNumber: user.phoneNumber.replace(/\D/g, ""),
       email: user.email.trim(),
       masterConfirm: user.masterConfirm,
@@ -126,12 +126,12 @@ export const Register = () => {
       password: user.password
     };
 
-    const response = await api.post("/users", userData);
+    const response = await api.post("/players", userData);
     if (response.status !== 201) {
       throw new Error("Erro ao salvar usuário");
     }
     console.log("Dados enviados:", {
-      username: formData.username.trim(),
+      name: formData.username.trim(),
       phoneNumber: formData.phoneNumber.replace(/\D/g, ""),
       email: formData.email.trim(),
       masterConfirm: formData.masterConfirm,
