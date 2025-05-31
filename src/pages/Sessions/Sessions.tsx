@@ -48,7 +48,7 @@ const mockAvailableSessions: Session[] = [
 export const Sessions = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
-
+    
   useEffect(() => {
     // Simula carregamento
     setTimeout(() => {
