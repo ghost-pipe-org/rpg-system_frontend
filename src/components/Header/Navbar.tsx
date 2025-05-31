@@ -5,6 +5,10 @@ export const Navbar = () => {
 
   const isAuthPage =
     location.pathname === "/cadastro" || location.pathname === "/login";
+    const linkClass = (path: string) =>
+    `hover:text-[#11C0B8] hover:font-bold font-light ${
+      location.pathname === path ? "text-[#11C0B8] font-bold" : ""
+    }`;
 
   return (
     <nav
@@ -22,21 +26,21 @@ export const Navbar = () => {
         <div className="flex items-center justify-center text-white font-prompt gap-x-6">
           <a
             href="/"
-            className="hover:text-[#11C0B8] hover:font-bold font-light"
+            className={linkClass("/")}
           >
             início
           </a>
           <p className="font-extrabold">•</p>
           <a
             href="/sessoes"
-            className="hover:text-[#11C0B8] hover:font-bold font-light"
+            className={linkClass("/sessoes")}
           >
             sessões
           </a>
           <p className="font-extrabold">•</p>
           <a
             href="/eventos"
-            className="hover:text-[#11C0B8] hover:font-bold font-light"
+            className={linkClass("/eventos")}
           >
             eventos
           </a>
