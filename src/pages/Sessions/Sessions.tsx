@@ -15,13 +15,14 @@ interface Session {
   iconUrl?: string;
 }
 
-const mockSessions: Session[] = [
+const mockAvailableSessions: Session[] = [
   {
     id: "1",
     title: "Guardiões do Hiato",
     system: "D&D",
     period: "Noite",
-    description: "Aventura épica em mundos desconhecidos.",
+    description:
+      "Aventura épica em mundos desconhecidos. Os jogadores serão transportados para terras misteriosas onde precisarão desvendar enigmas antigos, enfrentar criaturas lendárias e tomar decisões que podem mudar o destino de todo o reino.",
     master: "Ana Mestre",
     room: "A01",
     slots: 3,
@@ -33,7 +34,8 @@ const mockSessions: Session[] = [
     title: "Combos Paranormais",
     system: "Ordem Paranormal",
     period: "Tarde",
-    description: "Mistérios e investigações sobrenaturais.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut ",
     master: "Carlos GM",
     room: "B02",
     slots: 0,
@@ -50,22 +52,32 @@ export const Sessions = () => {
   useEffect(() => {
     // Simula carregamento
     setTimeout(() => {
-      setSessions(mockSessions);
+      setSessions(mockAvailableSessions);
       setLoading(false);
     }, 800);
   }, []);
 
   return (
     <LayoutComponents>
-      <div className="w-full max-w-lg mx-auto">
-        <h1 className="text-2xl font-prompt text-[#B8B8FF] mb-6 text-center">Sessões Disponíveis</h1>
-        {loading && <p className="text-white text-center">Carregando...</p>}
-        {!loading && sessions.length === 0 && (
-          <p className="text-white text-center">Nenhuma sessão disponível.</p>
-        )}
-        {sessions.map((session) => (
-          <SessionCard key={session.id} session={session} />
-        ))}
+      <div className="w-85">
+        <div>
+          <h1 className="text-3xl font-normal font-pixelsans text-[#E2F8F8] mb-5  text-center">
+            Sessões Disponíveis
+          </h1>
+        </div>
+        <div className="w-full max-w-lg mx-auto">
+          {loading && (
+            <p className="text-white text-center font-pixelsans">
+              Carregando...
+            </p>
+          )}
+          {!loading && sessions.length === 0 && (
+            <p className="text-white text-center font-pixelsans">Nenhuma sessão disponível.</p>
+          )}
+          {sessions.map((session) => (
+            <SessionCard key={session.id} session={session} />
+          ))}
+        </div>
       </div>
     </LayoutComponents>
   );
