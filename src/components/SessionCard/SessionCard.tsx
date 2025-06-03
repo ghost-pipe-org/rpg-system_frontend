@@ -120,7 +120,11 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                   {session.title}
                 </h2>
                 <p className="text-xs font-normal font-prompt text-[#adadad]">
-                  {session.system} | {session.date?.toLocaleDateString()}, {session.period}
+                  {session.system} | {session.date?.toLocaleDateString()}, {session.period === "manha"
+                ? "Manhã"
+                : session.period === "tarde"
+                ? "Tarde"
+                : "Noite"}
                 </p>
               </div>
             </div>
@@ -150,7 +154,11 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
             </div>
             <div>
               <span className="font-bold">Período:</span>{" "}
-              {session.period}
+              {session.period === "manha"
+                ? "Manhã"
+                : session.period === "tarde"
+                ? "Tarde"
+                : "Noite"}
             </div>
             <div>
               <span className="font-bold">Vagas disponíveis:</span>{" "}
@@ -190,7 +198,11 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                   {editedSession.title}
                 </h2>
                 <p className="text-xs font-normal font-prompt text-[#adadad]">
-                  {editedSession.system} | {editedSession.period}
+                  {session.system} | {session.date?.toLocaleDateString()}, {session.period === "manha"
+                ? "Manhã"
+                : session.period === "tarde"
+                ? "Tarde"
+                : "Noite"}
                 </p>
               </div>
             </div>

@@ -17,7 +17,23 @@ interface Session {
   iconUrl?: string;
 }
 
-const mockAvailableSessions: Session[] = [];
+
+
+const mockAvailableSessions: Session[] = [	{
+  id: "1",
+  title: "Sessão de Teste",
+  system: "Sistema de Exemplo",
+  period: "manha", 
+  date: null,
+  possibledate: [new Date("2023-10-01"), new Date("2023-10-02")],
+  description: "Descrição da sessão de teste.",
+  master: "Mestre Exemplo",
+  room: "Sala 101",
+  slots: 5,
+  requirements: "Requisitos da sessão de teste.",
+  iconUrl: "/example-icon.svg"
+},
+];
 
 export const Sessions = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
