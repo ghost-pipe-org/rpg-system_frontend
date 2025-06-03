@@ -242,7 +242,6 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                 <LabeledInputDark
                   id="period"
                   label="Período"
-                  value={editedSession.period}
                   options={[
                     { value: "manha", label: "Manhã" },
                     { value: "tarde", label: "Tarde" },
@@ -258,7 +257,6 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                     value: date.toISOString().split('T')[0],
                     label: date.toLocaleDateString(),
                   }))}
-                  value={editedSession.date ? editedSession.date.toISOString().split('T')[0] : ''}
                   onChange={(e) => handleDateChange(e.target.value)}
                 />
                 <LabeledInputDark
