@@ -1,4 +1,4 @@
-import { use, useState, useContext, FormEvent } from "react";
+import { useState, useContext, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
 import { LabeledInput } from "../../components/LabeledInput/LabeledInput";
@@ -102,7 +102,7 @@ export const Login = () => {
   }
   else {
     return (
-      <LayoutComponents>
+      <LayoutComponents type="user">
         <form className="mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
           <Title name="Login" />
   
@@ -142,7 +142,7 @@ export const Login = () => {
           />
   
           <Button
-            name="LOGIN"
+            name="Login"
             onClick={async (e) => {
               e.preventDefault();
               await submitForm();

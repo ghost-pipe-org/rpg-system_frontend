@@ -2,7 +2,7 @@ import { LayoutComponents } from "../../components/LayoutComponents/LayoutCompon
 
 export const LandingPage= () => {
   return (
-    <LayoutComponents>
+    <LayoutComponents type="user">
         <h1 className="text-white">Em desenvolvimento :)</h1>
     </LayoutComponents>
   );

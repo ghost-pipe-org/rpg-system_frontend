@@ -173,7 +173,7 @@ export const Register = () => {
   };
 
   return (
-    <LayoutComponents>
+    <LayoutComponents type="user">
       <form className="max-w-md mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
 
       <Title name="Cadastro"/>
