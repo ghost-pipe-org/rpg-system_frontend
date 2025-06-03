@@ -13,12 +13,14 @@ interface Option {
 // INPUT - MODO CLARO
 //////////////////////////////
 
-interface LabeledInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface LabeledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
   label: string;
   error?: string;
   options?: Option[];
   value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onSelectChange?: React.ChangeEventHandler<HTMLSelectElement>;
 }
 export const LabeledInput: React.FC<LabeledInputProps> = ({
   id,
@@ -26,6 +28,8 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
   error,
   options,
   value,
+  onChange,
+  onSelectChange,
   ...props
 }) => {
   return (
@@ -40,7 +44,7 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
             error ? "border-red-500" : "border-gray-300"
           } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           value={value}
-          onChange={props.onChange}
+          onChange={onSelectChange}
         >
           <option value="">Selecione...</option>
           {options.map((opt) => (
@@ -56,6 +60,7 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
             error ? "border-red-500" : "border-gray-300"
           } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           value={value}
+          onChange={onChange}
           {...props}
         />
       )}
@@ -95,17 +100,14 @@ export const LabeledTextarea: React.FC<LabeledTextareaProps> = ({
     </div>
   );
 };
-
-//////////////////////////////
-// INPUT - MODO ESCURO
-//////////////////////////////
-
-interface LabeledInputDarkProps extends InputHTMLAttributes<HTMLInputElement> {
+interface LabeledInputDarkProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
   label: string;
   error?: string;
   options?: Option[];
   value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onSelectChange?: React.ChangeEventHandler<HTMLSelectElement>;
 }
 export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
   id,
@@ -113,6 +115,8 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
   error,
   options,
   value,
+  onChange,
+  onSelectChange,
   ...props
 }) => {
   return (
@@ -127,7 +131,7 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
             error ? "border-red-500" : "border-[#5439E0]"
           } rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]`}
           value={value}
-          onChange={props.onChange}
+          onChange={onSelectChange}
         >
           <option value="">Selecione...</option>
           {options.map((opt) => (
@@ -143,6 +147,7 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
             error ? "border-red-500" : "border-[#5439E0]"
           } rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]`}
           value={value}
+          onChange={onChange}
           {...props}
         />
       )}
