@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, GreenButton, RedButton } from "../Button/Button";
+import { Button, GreenButton, RedButton } from "../Buttons/Button";
 import {
   LabeledInputDark,
   LabeledTextareaDark,
-} from "../LabeledInput/LabeledInput";
+} from "../Inputs/LabeledInput";
 
 interface Session {
   id: string;

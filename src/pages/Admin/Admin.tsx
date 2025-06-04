@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
+import { LayoutComponents } from "../../components/Layouts";
 import { SessionCard } from "../../components/SessionCard/SessionCard";
-import { Title } from "../../components/Title/Title";
+import { Title } from "../../components/Title";
 
 interface Session {
   id: string;
@@ -52,7 +52,7 @@ export const Admin = () => {
   }, []);
 
   return (
-    <LayoutComponents type="admin">
+    <LayoutComponents withNavbar={false}>
       <div className="w-85">
         <div>
           <Title name="Sessões para Verificação" />

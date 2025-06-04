@@ -1,9 +1,9 @@
 import { useState, useContext, FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
-import { LabeledInput } from "../../components/LabeledInput/LabeledInput";
-import { Button } from "../../components/Button/Button";
-import { Title } from "../../components/Title/Title";
+import { LayoutComponents } from "../../components/Layouts";
+import { LabeledInput } from "../../components/Inputs/LabeledInput";
+import { Button } from "../../components/Buttons/Button";
+import { Title } from "../../components/Title";
 import { AuthContext } from "../../context/auth";
 import { Navigate } from "react-router-dom";
 
@@ -102,7 +102,7 @@ export const Login = () => {
   }
   else {
     return (
-      <LayoutComponents type="user">
+      <LayoutComponents withNavbar={true}>	
         <form className="mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
           <Title name="Login" />
   
@@ -142,7 +142,7 @@ export const Login = () => {
           />
   
           <Button
-            name="Login"
+            name="LOGIN"
             onClick={async (e) => {
               e.preventDefault();
               await submitForm();
