@@ -3,10 +3,12 @@ import { LandingPage } from "../pages/Landing/LandingPage";
 import { Register } from "../pages/Register/Register";
 import { Login } from "../pages/Login/Login";
 import { Sessions } from "../pages/Sessions/Sessions";
+import { MasterSessions } from "../pages/MasterSessions/MasterSessions";
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/eventos" element={<MasterSessions />} />
         <Route path="/cadastro" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
