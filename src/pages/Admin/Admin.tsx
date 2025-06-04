@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { LayoutComponents } from "../../components/Layouts";
-import { SessionCard } from "../../components/SessionCard/SessionCard";
 import { Title } from "../../components/Title";
+import { SessionCard } from "../../components/SessionCard";
 
 interface Session {
   id: string;

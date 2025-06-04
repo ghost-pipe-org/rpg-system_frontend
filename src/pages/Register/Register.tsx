@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { LayoutComponents } from "../../components/Layouts";
-import { LabeledInput } from "../../components/Inputs/LabeledInput";
-import { Button } from "../../components/Buttons/Button";
+import { LabeledInput } from "../../components/Inputs";
+import { DefaultButton } from "../../components/Buttons";
 import { Title } from "../../components/Title";
 import { api } from "../../services/api";
 
@@ -301,7 +301,7 @@ export const Register = () => {
           minLength={6}
         />
 
-        <Button
+        <DefaultButton
           name="CRIAR CONTA"
           onClick={async (e) => {
             e.preventDefault();

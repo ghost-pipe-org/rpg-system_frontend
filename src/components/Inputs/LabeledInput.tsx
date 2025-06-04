@@ -2,16 +2,13 @@ import React, {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
 } from "react";
-import "../../global.css";
 
 interface Option {
   value: string;
   label: string;
 }
 
-//////////////////////////////
-// INPUT - MODO CLARO
-//////////////////////////////
+// INPUT - Modo claro
 
 interface LabeledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
@@ -69,9 +66,7 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
   );
 };
 
-//////////////////////////////
-// TEXTAREA - MODO CLARO
-//////////////////////////////
+// TEXTAREA - Modo claro
 
 interface LabeledTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
@@ -100,6 +95,9 @@ export const LabeledTextarea: React.FC<LabeledTextareaProps> = ({
     </div>
   );
 };
+
+// INPUT - Modo escuro
+
 interface LabeledInputDarkProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   id: string;
   label: string;
@@ -156,9 +154,7 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
   );
 };
 
-//////////////////////////////
-// TEXTAREA - MODO ESCURO
-//////////////////////////////
+// TEXTAREA - Modo escuro
 
 interface LabeledTextareaDarkProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;

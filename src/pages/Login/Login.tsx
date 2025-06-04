@@ -1,11 +1,13 @@
 import { useState, useContext, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { LayoutComponents } from "../../components/Layouts";
-import { LabeledInput } from "../../components/Inputs/LabeledInput";
-import { Button } from "../../components/Buttons/Button";
+import { LabeledInput } from "../../components/Inputs";
+import { DefaultButton } from "../../components/Buttons";
 import { Title } from "../../components/Title";
 import { AuthContext } from "../../context/auth";
 import { Navigate } from "react-router-dom";
+
+// Esse login só Deus sabe como eu vou fazer funcionar quando otimizar o código
 
 interface FormData {
   email: string;
@@ -141,7 +143,7 @@ export const Login = () => {
             minLength={6}
           />
   
-          <Button
+          <DefaultButton
             name="LOGIN"
             onClick={async (e) => {
               e.preventDefault();
@@ -149,10 +151,10 @@ export const Login = () => {
             }}
             type="submit"
             isLoading={isSubmitting}
-            className="w-full justify-center mt-6 py-3"
+            className="w-full justify-center mt-2 py-3"
           />
   
-          <div className="flex justify-center items-center mt-[50px]">
+          <div className="flex justify-center items-center mt-4">
             <span className="text-sm text-[#adadad] leading-6 pr-1.5">
               Não possuí uma conta?
             </span>
@@ -161,6 +163,16 @@ export const Login = () => {
               className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
             >
               Criar conta.
+            </Link>
+          </div>
+
+          
+          <div className="flex justify-center items-center mt-1">
+            <Link
+              to="/admin"
+              className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
+            >
+              Acessar área administrativa.
             </Link>
           </div>
         </form>
