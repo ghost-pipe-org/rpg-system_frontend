@@ -40,7 +40,7 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
           className={`w-full px-3 py-2 bg-white border ${
             error ? "border-red-500" : "border-gray-300"
           } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
-          value={value ?? ""}
+          value={value}
           onChange={onSelectChange}
         >
           <option value="">Selecione...</option>
@@ -56,7 +56,7 @@ export const LabeledInput: React.FC<LabeledInputProps> = ({
           className={`w-full px-3 py-2 bg-white border ${
             error ? "border-red-500" : "border-gray-300"
           } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
-          value={value ?? ""}
+          value={value}
           onChange={onChange}
           {...props}
         />
@@ -128,7 +128,7 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
           className={`w-full bg-[#0f0f15] border ${
             error ? "border-red-500" : "border-[#5439E0]"
           } rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]`}
-          value={value ?? ""}
+          value={value}
           onChange={onSelectChange}
         >
           <option value="">Selecione...</option>
@@ -144,7 +144,7 @@ export const LabeledInputDark: React.FC<LabeledInputDarkProps> = ({
           className={`w-full bg-[#0f0f15] border ${
             error ? "border-red-500" : "border-[#5439E0]"
           } rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]`}
-          value={value ?? ""}
+          value={value}
           onChange={onChange}
           {...props}
         />
