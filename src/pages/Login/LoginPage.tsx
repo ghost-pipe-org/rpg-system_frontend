@@ -105,9 +105,8 @@ export const Login = () => {
   else {
     return (
       <LayoutComponents withNavbar={true}>	
-      <form className="mx-auto mb:min-w-[370px] p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
+      <form className="mx-auto w-[370px] min-w-[290px] p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
         <Title name="Login" />
-    
         {error && (
         <div className="block text-base font-normal font text-red-500 mb-1 font-prompt">
           {error}
