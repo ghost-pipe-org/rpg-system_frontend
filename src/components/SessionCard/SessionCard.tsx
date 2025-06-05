@@ -112,7 +112,7 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                   {session.title}
                 </h2>
                 <p className="text-xs font-normal font-prompt text-[#adadad]">
-                  {session.system} | {session.date?.toLocaleDateString()},{" "}
+                  {session.system} | {session.date?.toLocaleDateString()}{" "}
                   {session.period === "manha"
                     ? "Manhã"
                     : session.period === "tarde"
