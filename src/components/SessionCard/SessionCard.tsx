@@ -222,6 +222,7 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
         </div>
 
         {/* Área de edição e aprovação/rejeição */}
+
         {expanded && (
           <div className="mt-6 text-xs text-[#E2F8F8] space-y-3 font-prompt flex flex-col gap-2">
             <div
@@ -233,49 +234,58 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
             <div className="space-y-4">
               <div className="space-y-1">
                 {/* Campos editáveis */}
+                <div className="mb-4">
+                  <label
+                    htmlFor="period"
+                    className="block text-sm text-white mb-1 font-bold font-prompt"
+                  >
+                    Período
+                  </label>
+                  <select
+                    id="period"
+                    value={editedSession.period}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "period",
+                        e.target.value as "manha" | "tarde" | "noite",
+                      )
+                    }
+                    className="w-full bg-[#0f0f15] border border-[#5439E0] rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]"
+                  >
+                    <option value="manha">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                  </select>
+                </div>
 
-                <label htmlFor="period" className="block mb-1 font-bold">
-                  Período
-                </label>
-                <select
-                  id="period"
-                  value={editedSession.period}
-                  onChange={(e) =>
-                    handleInputChange(
-                      "period",
-                      e.target.value as "manha" | "tarde" | "noite",
-                    )
-                  }
-                  className="bg-[#181828] text-[#E2F8F8] rounded px-3 py-2 w-full"
-                >
-                  <option value="manha">Manhã</option>
-                  <option value="tarde">Tarde</option>
-                  <option value="noite">Noite</option>
-                </select>
-
-                <label htmlFor="date" className="block mb-1 font-bold">
-                  Data
-                </label>
-                <select
-                  id="date"
-                  value={
-                    editedSession.date
-                      ? editedSession.date.toISOString().split("T")[0]
-                      : ""
-                  }
-                  onChange={(e) => handleDateChange(e.target.value)}
-                  className="bg-[#181828] text-[#E2F8F8] rounded px-3 py-2 w-full"
-                >
-                  <option value="">Selecione uma data</option>
-                  {session.possibledate.map((date) => (
-                    <option
-                      key={date.toISOString()}
-                      value={date.toISOString().split("T")[0]}
-                    >
-                      {date.toLocaleDateString()}
-                    </option>
-                  ))}
-                </select>
+                <div className="mb-4">
+                  <label
+                    htmlFor="date"
+                    className="block text-sm text-white mb-1 font-bold font-prompt"
+                  >
+                    Data
+                  </label>
+                  <select
+                    id="date"
+                    value={
+                      editedSession.date
+                        ? editedSession.date.toISOString().split("T")[0]
+                        : ""
+                    }
+                    onChange={(e) => handleDateChange(e.target.value)}
+                    className="w-full bg-[#0f0f15] border border-[#5439E0] rounded px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#5439E0]"
+                  >
+                    <option value="">Selecione uma data</option>
+                    {session.possibledate.map((date) => (
+                      <option
+                        key={date.toISOString()}
+                        value={date.toISOString().split("T")[0]}
+                      >
+                        {date.toLocaleDateString()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <LabeledInputDark
                   id="room"
                   label="Sala"
