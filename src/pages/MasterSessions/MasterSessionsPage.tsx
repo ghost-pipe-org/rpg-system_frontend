@@ -50,7 +50,7 @@ export const MasterSessions = () => {
     register,
     handleSubmit,
     formState: { errors },
-    // watch,
+    watch,
   } = useForm<SessionFormData>({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
@@ -72,9 +72,7 @@ export const MasterSessions = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  {
-    /* const watchAll = watch();*/
-  }
+  const watchAll = watch();
 
   const onSubmit = async (data: SessionFormData) => {
     setIsSubmitting(true);
@@ -103,9 +101,9 @@ export const MasterSessions = () => {
 
   return (
     <LayoutComponents withNavbar={true}>
-      {/* <pre className="bg-black/60 text-green-300 p-4 rounded mb-4 text-xs max-w-md mx-auto overflow-x-auto">
+      <pre className="bg-black/60 text-green-300 p-4 rounded mb-4 text-xs max-w-md mx-auto overflow-x-auto">
         {JSON.stringify(watchAll, null, 2)}
-      </pre> */}
+      </pre>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-md mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg"
@@ -125,28 +123,63 @@ export const MasterSessions = () => {
           {...register("description")}
           error={errors.description?.message}
         />
+        <div className="mb-4">
+          <label
+            htmlFor="system"
+            className="block text-base font-normal text-white mb-1 font-prompt"
+          >
+            Sistema
+          </label>
+          <select
+            id="system"
+            {...register("system")}
+            className="w-full px-3 py-2 bg-white border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Selecione um sistema
+            </option>
+            {Object.entries(System).map(([key]) => (
+              <option key={key} value={key}>
+                {SystemLabels[key as keyof typeof System]}
+              </option>
+            ))}
+          </select>
+          {errors.system && (
+            <p className="mt-1 text-base text-red-600">
+              {errors.system.message}
+            </p>
+          )}
+        </div>
 
-        <LabeledInput
-          id="system"
-          label="Sistema"
-          options={Object.entries(System).map(([key]) => ({
-            value: key,
-            label: SystemLabels[key as keyof typeof System],
-          }))}
-          {...register("system")}
-          error={errors.system?.message}
-        />
-
-        <LabeledInput
-          id="period"
-          label="Período"
-          options={Object.entries(Period).map(([key]) => ({
-            value: key,
-            label: PeriodLabels[key as keyof typeof Period],
-          }))}
-          {...register("period")}
-          error={errors.period?.message}
-        />
+        <div className="mb-4">
+          <label
+            htmlFor="period"
+            className="block text-base font-normal text-white mb-1 font-prompt"
+          >
+            Período
+          </label>
+          <select
+            id="period"
+            {...register("period")}
+            className="w-full px-3 py-2 bg-white border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Selecione um período
+            </option>
+            {Object.entries(Period).map(([key]) => (
+              <option key={key} value={key}>
+                {PeriodLabels[key as keyof typeof Period]}
+              </option>
+            ))}
+          </select>
+          {errors.period && (
+            <p className="mt-1 text-base text-red-600">
+              {errors.period.message}
+            </p>
+          )}
+        </div>
 
         <div className="flex gap-4">
           <LabeledInput

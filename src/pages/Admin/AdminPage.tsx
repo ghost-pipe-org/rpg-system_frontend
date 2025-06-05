@@ -52,7 +52,7 @@ export const Admin = () => {
   }, []);
 
   return (
-    <LayoutComponents withNavbar={false}>
+    <LayoutComponents withNavbar={true}>
       <div className="w-85">
         <div>
           <Title name="Sessões para Verificação" />
