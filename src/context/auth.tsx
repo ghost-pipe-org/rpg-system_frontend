@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const signIn = async (email: string, password: string) => {
         try {
-          const response = await api.post("/login", {
+          const response = await api.post("/auth/login", {
             email,
             password,
           });

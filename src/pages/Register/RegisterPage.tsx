@@ -6,7 +6,7 @@ import { Title } from "../../components/Title";
 import { api } from "../../services/api";
 
 interface FormData {
-  username: string;
+  name: string;
   phoneNumber: string;
   email: string;
   masterConfirm: boolean;
@@ -17,7 +17,7 @@ interface FormData {
 
 export const Register = () => {
   const [formData, setFormData] = useState<FormData>({
-    username: "",
+    name: "",
     phoneNumber: "",
     email: "",
     masterConfirm: false,
@@ -66,7 +66,7 @@ export const Register = () => {
   };
 
   const validateForm = (): boolean => {
-    if (!formData.username.trim()) {
+    if (!formData.name.trim()) {
       setError("Nome é obrigatório");
       return false;
     }
@@ -118,7 +118,7 @@ export const Register = () => {
 
   const handleSaveUser = async (user: FormData) => {
     const userData = {
-      name: user.username.trim(),
+      name: user.name.trim(),
       phoneNumber: user.phoneNumber.replace(/\D/g, ""),
       email: user.email.trim(),
       masterConfirm: user.masterConfirm,
@@ -126,12 +126,12 @@ export const Register = () => {
       password: user.password
     };
 
-    const response = await api.post("/players", userData);
+    const response = await api.post("/auth/signup", userData);
     if (response.status !== 201) {
       throw new Error("Erro ao salvar usuário");
     }
     console.log("Dados enviados:", {
-      name: formData.username.trim(),
+      name: formData.name.trim(),
       phoneNumber: formData.phoneNumber.replace(/\D/g, ""),
       email: formData.email.trim(),
       masterConfirm: formData.masterConfirm,
@@ -153,7 +153,7 @@ export const Register = () => {
       alert("Cadastro realizado com sucesso!");
       
       setFormData({
-        username: "",
+        name: "",
         phoneNumber: "",
         email: "",
         masterConfirm: false,
@@ -185,11 +185,11 @@ export const Register = () => {
         )}
 
         <LabeledInput
-          id="username"
-          name="username"
+          id="name"
+          name="name"
           label="Nome*"
           type="text"
-          value={formData.username}
+          value={formData.name}
           onChange={handleChange}
           placeholder="Insira seu nome"
           required={true}
