@@ -13,7 +13,7 @@ type ButtonProps = {
 // Classes de variantes do botão
 const VARIANT_CLASSES: Record<NonNullable<ButtonProps["variant"]>, string> = {
   default:
-    "bg-cyan-400 hover:bg-cyan-600 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700",
+    "bg-cyan-400 hover:bg-cyan-600 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 uppercase",
   red:
     "bg-red-500 hover:bg-red-600 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700",
   green:
