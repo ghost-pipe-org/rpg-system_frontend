@@ -1,181 +1,121 @@
-import { useState, useContext, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, Navigate } from "react-router-dom";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { LayoutComponents } from "../../components/Layouts";
 import { LabeledInput } from "../../components/Inputs";
-import { DefaultButton } from "../../components/Buttons";
 import { Title } from "../../components/Title";
-import { AuthContext } from "../../context/auth";
-import { Navigate } from "react-router-dom";
+import { DefaultButton } from "../../components/Buttons";
 
-// Esse login só Deus sabe como eu vou fazer funcionar quando otimizar o código
+const loginSchema = z.object({
+  email: z
+    .string()
+    .nonempty({ message: "Email é obrigatório" })
+    .email({ message: "Email inválido" }),
+  password: z
+    .string()
+    .nonempty({ message: "Senha é obrigatória" })
+    .min(6, { message: "Senha deve ter no mínimo 6 " })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/, {
+      message:
+        "Senha deve conter pelo menos uma letra maiúscula, uma minúscula e um número",
+    }),
+});
 
-interface FormData {
-  email: string;
-  password: string;
-}
+type LoginFormInputs = z.infer<typeof loginSchema>;
 
 export const Login = () => {
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-    password: "",
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
   });
 
+  const watchAll = watch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const { signIn, signed } = useContext(AuthContext);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const validateForm = (): boolean => {
-    if (!formData.email.trim()) {
-      setError("Email é obrigatório");
-      return false;
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      setError("Email inválido");
-      return false;
-    }
-
-    if (!formData.password) {
-      setError("Senha é obrigatória");
-      return false;
-    } else if (formData.password.length < 6) {
-      setError("Senha deve ter pelo menos 6 caracteres");
-      return false;
-    }
-
-    setError("");
-    return true;
-  };
-
-  const handleSignIn = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
-  
-    const userData = {
-      email: formData.email.trim(),
-      password: formData.password,
-    };
-  
-    try {
-      await signIn(userData.email, userData.password);
-      alert("Login realizado com sucesso!");
-    } catch (error) {
-      setError("Erro ao fazer login. Verifique suas credenciais.");
-    }
-  };
-
-
-
-  const submitForm = async (): Promise<void> => {
-    if (isSubmitting) return;
-    if (!validateForm()) return;
-
+  async function onSubmit(data: LoginFormInputs) {
     setIsSubmitting(true);
+    setError("");
     try {
       await new Promise<void>((resolve) => setTimeout(resolve, 1500));
-
       console.log("Dados enviados:", {
-        email: formData.email.trim(),
-        password: formData.password,
+        email: data.email.trim(),
       });
 
       alert("Login realizado com sucesso!");
-
-      setFormData({
-        email: "",
-        password: "",
-      });
-    } catch (err: unknown) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Ocorreu um erro inesperado";
-      setError(`Falha no login: ${errorMessage}`);
+    } catch {
+      setError("Erro ao realizar login.");
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  if (signed) {
-    return <Navigate to="/" />;
   }
-  else {
-    return (
-      <LayoutComponents withNavbar={true}>	
-      <form className="mx-auto w-[370px] min-w-[290px] p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
-        <Title name="Login" />
-        {error && (
-        <div className="block text-base font-normal font text-red-500 mb-1 font-prompt">
-          {error}
-        </div>
-        )}
-    
-        <LabeledInput
-        id="email"
-        name="email"
-        label="Email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Insira seu@email.com"
-        required={true}
-        minLength={6}
-        onBlur={() => {
-          if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
-          setError("Email inválido");
-          }
-        }}
-        />
-    
-        <LabeledInput
-        id="password"
-        name="password"
-        label="Senha"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Insira sua senha"
-        required={true}
-        minLength={6}
-        />
-    
-        <DefaultButton
-        name="LOGIN"
-        onClick={async (e) => {
-          e.preventDefault();
-          await submitForm();
-        }}
-        type="submit"
-        isLoading={isSubmitting}
-        className="w-full justify-center mt-2 py-3"
-        />
-    
-        <div className="flex justify-center items-center mt-4">
-        <span className="text-sm text-[#adadad] leading-6 pr-1.5">
-          Não possuí uma conta?
-        </span>
-        <Link
-          to="/cadastro"
-          className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
-        >
-          Criar conta.
-        </Link>
-        </div>
 
-        
-        <div className="flex justify-center items-center mt-1">
-        <Link
-          to="/admin"
-          className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
-        >
-          Acessar área administrativa.
-        </Link>
+  // Simular um usuário admin
+
+  const mockedAdmin = {
+    email: "admin@email.com",
+    password: "Admin123",
+  };
+  if (
+    watchAll.email === mockedAdmin.email &&
+    watchAll.password === mockedAdmin.password && isSubmitting === true
+  )
+    return <Navigate to="/admin" />;
+
+  return (
+    <LayoutComponents withNavbar={true}>
+      
+      {/*Verificar output*/}
+      <pre className="bg-black/60 text-green-300 p-4 rounded mb-4 text-xs max-w-md mx-auto overflow-x-auto">
+        {JSON.stringify(watchAll, null, 2)}
+      </pre>
+
+      <form
+        className="mx-auto w-[370px] min-w-[290px] p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Title name="Login" />
+
+        <LabeledInput
+          id="email"
+          label="Email"
+          {...register("email")}
+          error={errors.email?.message}
+        />
+
+        <LabeledInput
+          id="password"
+          label="Senha"
+          type="password"
+          {...register("password")}
+          error={errors.password?.message}
+        />
+
+        <DefaultButton
+          name="LOGIN"
+          type="submit"
+          isLoading={isSubmitting}
+          className="w-full justify-center mt-2 py-3"
+        />
+
+        <div className="flex justify-center items-center mt-4">
+          <span className="text-sm text-[#adadad] leading-6 pr-1.5">
+            Não possuí uma conta?
+          </span>
+          <Link
+            to="/cadastro"
+            className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
+          >
+            Criar conta.
+          </Link>
         </div>
       </form>
-      </LayoutComponents>
-    );
-  }
+    </LayoutComponents>
+  );
 };
