@@ -47,18 +47,18 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
   // Manipula mudanças nos campos de edição
   const handleInputChange = (
     field: keyof Session,
-    value: string | number | Date | null | undefined
+    value: string | number | Date | null | undefined,
   ) => {
-    setEditedSession(prev => ({
+    setEditedSession((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   // Manipula mudança de data (converte string para Date)
   const handleDateChange = (dateString: string) => {
     const date = dateString ? new Date(dateString) : null;
-    handleInputChange('date', date);
+    handleInputChange("date", date);
   };
 
   // Aprova a sessão (simulação: salva no localStorage)
@@ -69,10 +69,12 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
       approvedAt: new Date().toISOString(),
     };
     const approvedSessions = JSON.parse(
-      localStorage.getItem("approvedSessions") || "[]"
+      localStorage.getItem("approvedSessions") || "[]",
     );
     approvedSessions.push(approvedSession);
     localStorage.setItem("approvedSessions", JSON.stringify(approvedSessions));
+
+    console.log("Sessão aprovada:", approvedSession);
     alert("Sessão aprovada com sucesso!");
   };
 
@@ -89,7 +91,7 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
       rejectedAt: new Date().toISOString(),
     };
     const rejectedSessions = JSON.parse(
-      localStorage.getItem("rejectedSessions") || "[]"
+      localStorage.getItem("rejectedSessions") || "[]",
     );
     rejectedSessions.push(rejectedSession);
     localStorage.setItem("rejectedSessions", JSON.stringify(rejectedSessions));
@@ -103,7 +105,11 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
       <div className="bg-[#060609] rounded-sm p-4 mb-6 shadow-lg border border-[#5439E0]">
         <div className="flex flex-row items-start gap-2">
           <div className="flex-shrink-0">
-            <img src={iconUrl} alt="Ícone" className="w-13 h-13 object-contain" />
+            <img
+              src={iconUrl}
+              alt="Ícone"
+              className="w-13 h-13 object-contain"
+            />
           </div>
           <div>
             <div className="flex items-center gap-4">
@@ -116,8 +122,8 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                   {session.period === "manha"
                     ? "Manhã"
                     : session.period === "tarde"
-                    ? "Tarde"
-                    : "Noite"}
+                      ? "Tarde"
+                      : "Noite"}
                 </p>
               </div>
             </div>
@@ -138,26 +144,32 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
             ></div>
             <Detail label="Mestre" value={session.master} />
             <Detail label="Sala" value={session.room} />
-            <Detail label="Data" value={session.date?.toLocaleDateString() || "Não definida"} />
+            <Detail
+              label="Data"
+              value={session.date?.toLocaleDateString() || "Não definida"}
+            />
             <Detail
               label="Período"
               value={
                 session.period === "manha"
                   ? "Manhã"
                   : session.period === "tarde"
-                  ? "Tarde"
-                  : "Noite"
+                    ? "Tarde"
+                    : "Noite"
               }
             />
             <Detail label="Vagas disponíveis" value={session.slots} />
-            <Detail label="Requisitos de participação" value={session.requirements} />
+            <Detail
+              label="Requisitos de participação"
+              value={session.requirements}
+            />
           </div>
         )}
 
         {/* Botão de expandir/recolher */}
         <DefaultButton
           name={expanded ? "Inscreva-se" : "Saiba mais +"}
-          onClick={() => setExpanded(v => !v)}
+          onClick={() => setExpanded((v) => !v)}
           type="button"
           className="w-full justify-center mt-6 py-3"
         />
@@ -171,7 +183,11 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
       <div className="bg-[#060609] rounded-sm p-4 mb-6 shadow-lg border border-[#5439E0]">
         <div className="flex flex-row items-start gap-2">
           <div className="flex-shrink-0">
-            <img src={iconUrl} alt="Ícone" className="w-13 h-13 object-contain" />
+            <img
+              src={iconUrl}
+              alt="Ícone"
+              className="w-13 h-13 object-contain"
+            />
           </div>
           <div>
             <div className="flex items-center gap-4">
@@ -184,8 +200,8 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                   {session.period === "manha"
                     ? "Manhã"
                     : session.period === "tarde"
-                    ? "Tarde"
-                    : "Noite"}
+                      ? "Tarde"
+                      : "Noite"}
                 </p>
               </div>
             </div>
@@ -200,7 +216,7 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
           <Detail
             label="Datas possíveis"
             value={editedSession.possibledate
-              .map(date => date.toLocaleDateString())
+              .map((date) => date.toLocaleDateString())
               .join(", ")}
           />
         </div>
@@ -217,35 +233,54 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
             <div className="space-y-4">
               <div className="space-y-1">
                 {/* Campos editáveis */}
-                <LabeledInputDark
+
+                <label htmlFor="period" className="block mb-1 font-bold">
+                  Período
+                </label>
+                <select
                   id="period"
-                  label="Período"
-                  options={[
-                    { value: "manha", label: "Manhã" },
-                    { value: "tarde", label: "Tarde" },
-                    { value: "noite", label: "Noite" },
-                  ]}
                   value={editedSession.period}
-                  onChange={e =>
-                    handleInputChange("period", e.target.value as "manha" | "tarde" | "noite")
+                  onChange={(e) =>
+                    handleInputChange(
+                      "period",
+                      e.target.value as "manha" | "tarde" | "noite",
+                    )
                   }
-                />
-                <LabeledInputDark
+                  className="bg-[#181828] text-[#E2F8F8] rounded px-3 py-2 w-full"
+                >
+                  <option value="manha">Manhã</option>
+                  <option value="tarde">Tarde</option>
+                  <option value="noite">Noite</option>
+                </select>
+
+                <label htmlFor="date" className="block mb-1 font-bold">
+                  Data
+                </label>
+                <select
                   id="date"
-                  label="Data"
-                  type="select"
-                  options={session.possibledate.map(date => ({
-                    value: date.toISOString().split("T")[0],
-                    label: date.toLocaleDateString(),
-                  }))}
-                  value={editedSession.date ? editedSession.date.toISOString().split("T")[0] : ""}
-                  onChange={e => handleDateChange(e.target.value)}
-                />
+                  value={
+                    editedSession.date
+                      ? editedSession.date.toISOString().split("T")[0]
+                      : ""
+                  }
+                  onChange={(e) => handleDateChange(e.target.value)}
+                  className="bg-[#181828] text-[#E2F8F8] rounded px-3 py-2 w-full"
+                >
+                  <option value="">Selecione uma data</option>
+                  {session.possibledate.map((date) => (
+                    <option
+                      key={date.toISOString()}
+                      value={date.toISOString().split("T")[0]}
+                    >
+                      {date.toLocaleDateString()}
+                    </option>
+                  ))}
+                </select>
                 <LabeledInputDark
                   id="room"
                   label="Sala"
                   value={editedSession.room}
-                  onChange={e => handleInputChange("room", e.target.value)}
+                  onChange={(e) => handleInputChange("room", e.target.value)}
                 />
                 {/* Campo para motivo da rejeição */}
                 {isRejecting && (
@@ -253,15 +288,21 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
                     id="rejectionReason"
                     label="Motivo da Rejeição"
                     value={rejectionReason}
-                    onChange={e => setRejectionReason(e.target.value)}
+                    onChange={(e) => setRejectionReason(e.target.value)}
                     rows={3}
                   />
                 )}
                 {/* Botões de ação */}
                 <div className="flex space-x-4">
-                  <GreenButton name="Aprovar" onClick={handleApprove} type="button" />
+                  <GreenButton
+                    name="Aprovar"
+                    onClick={handleApprove}
+                    type="button"
+                  />
                   <RedButton
-                    name={isRejecting ? "Confirmar Rejeição" : "Rejeitar Sessão"}
+                    name={
+                      isRejecting ? "Confirmar Rejeição" : "Rejeitar Sessão"
+                    }
                     onClick={handleReject}
                     type="button"
                     className="flex-1 justify-center py-2.5"
@@ -275,7 +316,7 @@ export const SessionCard = ({ session, type = "user" }: SessionCardProps) => {
         {/* Botão de expandir/recolher */}
         <DefaultButton
           name={expanded ? "Fechar Detalhes" : "Ver Detalhes"}
-          onClick={() => setExpanded(v => !v)}
+          onClick={() => setExpanded((v) => !v)}
           type="button"
           className="w-full justify-center mt-6 py-3"
         />
