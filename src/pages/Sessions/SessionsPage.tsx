@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
-import { SessionCard } from "../../components/SessionCard/SessionCard";
-
+import { LayoutComponents } from "../../components/Layouts";
+import { Title } from "../../components/Title";
+import { SessionCard } from "../../components/SessionCard";
+import { Link } from "react-router-dom";
 interface Session {
   id: string;
   title: string;
   system: string;
-  period: string;
+  period: "manha" | "tarde" | "noite";
+  date?: Date | null;
+  possibledate: Date[]; // Make possibledate required
   description: string;
   master: string;
   room: string;
@@ -16,11 +19,12 @@ interface Session {
 }
 
 const mockAvailableSessions: Session[] = [
-  {
+{
     id: "1",
     title: "Guardiões do Hiato",
     system: "D&D",
-    period: "Noite",
+    period: "noite",
+    possibledate: [new Date("2024-07-01T19:00:00")],
     description:
       "Aventura épica em mundos desconhecidos. Os jogadores serão transportados para terras misteriosas onde precisarão desvendar enigmas antigos, enfrentar criaturas lendárias e tomar decisões que podem mudar o destino de todo o reino.",
     master: "Ana Mestre",
@@ -33,7 +37,8 @@ const mockAvailableSessions: Session[] = [
     id: "2",
     title: "Combos Paranormais",
     system: "Ordem Paranormal",
-    period: "Tarde",
+    period: "tarde",
+    possibledate: [new Date("2024-07-02T14:00:00")],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut ",
     master: "Carlos GM",
@@ -42,41 +47,52 @@ const mockAvailableSessions: Session[] = [
     requirements: "Nenhum.",
     iconUrl: "/op-icon.png",
   },
-  // ...adicione mais sessões mock se quiser
 ];
 
 export const Sessions = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
-    
+
   useEffect(() => {
-    // Simula carregamento
-    setTimeout(() => {
+    // Simular carregamento
+    const timer = setTimeout(() => {
       setSessions(mockAvailableSessions);
       setLoading(false);
     }, 800);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <LayoutComponents>
+    <LayoutComponents withNavbar>
       <div className="w-85">
-        <div>
-          <h1 className="text-3xl font-normal font-pixelsans text-[#E2F8F8] mb-5  text-center">
-            Sessões Disponíveis
-          </h1>
-        </div>
+        <Title name="Sessões Disponíveis" />
         <div className="w-full max-w-lg mx-auto">
           {loading && (
-            <p className="text-white text-center font-pixelsans">
+            <p className="text-white text-center font-prompt">
               Carregando...
             </p>
           )}
           {!loading && sessions.length === 0 && (
-            <p className="text-white text-center font-pixelsans">Nenhuma sessão disponível.</p>
+            <p className="text-white text-center font-prompt">
+              Não há sessões disponíveis no momento.{" "}
+            </p>
           )}
-          {sessions.map((session) => (
-            <SessionCard key={session.id} session={session} />
-          ))}
+
+          {!loading &&
+            sessions.map((session) => (
+              <SessionCard key={session.id} session={session} /> // Corrigir key prop
+            ))
+          }
+          {!loading && (
+            <div className="text-center mt-4">
+              <Link
+                to="/sessoes/criar"
+                className="text-indigo-400 hover:underline hover:text-cyan-500"
+              >
+                Criar sessão
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </LayoutComponents>

@@ -1,9 +1,10 @@
-import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
+import { LayoutComponents } from "../../components/Layouts";
+import { Title } from "../../components/Title";
 
 export const LandingPage= () => {
   return (
-    <LayoutComponents>
-        <h1 className="text-white">Em desenvolvimento :)</h1>
+    <LayoutComponents withNavbar={true}>
+        <Title name="Em Desenvolvimento :3" />
     </LayoutComponents>
   );
 };

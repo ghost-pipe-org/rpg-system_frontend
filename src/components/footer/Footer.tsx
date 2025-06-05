@@ -1,8 +1,9 @@
 import { Github, Instagram, Mail } from "lucide-react";
 
-export const Footer = () => {
+export default function Footer() {
   return (
     <footer className="flex flex-col justify-center items-center mt-8">
+      {/* Fundo do footer */}
       <div
         className="w-screen"
         style={{
@@ -13,11 +14,9 @@ export const Footer = () => {
         }}
       >
         <div className="flex flex-row mx-auto w-full justify-center px-5 pb-2 mt-5 pr-4 ml-4 sm:ml-0 sm:pr-0 gap-3">
-          {" "}
-          {/* Conteúdo do footer 1*/}
+          {/* Sobre Nós */}
           <div className="flex flex-col justify-center gap-1">
-            {/* Sobre Nos*/}
-            <h2 className=" font-prompt text-base font-medium text-[#11C0B8] drop-shadow-lg">
+            <h2 className="font-prompt text-base font-medium text-[#11C0B8] drop-shadow-lg">
               Sobre Nós
             </h2>
             <p className="font-prompt text-xs font-light text-white my-1 mb-3 sm:w-2xs w-48">
@@ -26,9 +25,9 @@ export const Footer = () => {
               nossa instituição. Para saber mais, acesse nossas redes sociais.
             </p>
           </div>
+
+          {/* Siga-nos */}
           <div className="flex flex-col max-w-sm gap-1">
-            {" "}
-            {/* Siga nos*/}
             <h2 className="font-prompt text-base font-medium text-[#11C0B8]">
               Siga-nos
             </h2>
@@ -42,28 +41,29 @@ export const Footer = () => {
               href="#"
               className="font-light font-prompt text-white flex items-center gap-2 text-xs hover:text-[#11C0B8] my-0.5"
             >
-              <Instagram /> <span className="hidden sm:inline">Instagram</span>
+              <Instagram />
+              <span className="hidden sm:inline">Instagram</span>
               <span className="sm:hidden">Insta</span>
             </a>
             <a
               href="#"
               className="font-light font-prompt text-white flex items-center gap-2 text-xs hover:text-[#11C0B8] my-0.5"
             >
-              <Mail /> <span className="hidden sm:inline">nosso@email.com</span>
+              <Mail />
+              <span className="hidden sm:inline">nosso@email.com</span>
               <span className="sm:hidden">Email</span>
             </a>
           </div>
         </div>
       </div>
 
+      {/* Patrocinadores */}
       <div
         className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-8 w-full bg-[#2E1F7A] py-4 relative z-20 border-t-2 border-transparent bg-clip-border"
         style={{
           borderImage: "linear-gradient(to right, #2E1F7A, #5439E0) 1",
         }}
       >
-        {" "}
-        {/* patrocinadores*/}
         <img src="/logo-uepb.svg" alt="Logo da UEPB" />
         <img src="/logo-cacc.svg" alt="Logo do centro" />
         <img src="/logo-curso.svg" alt="Logo do curso" />

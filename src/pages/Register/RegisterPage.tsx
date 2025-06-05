@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
-import { LayoutComponents } from "../../components/LayoutComponents/LayoutComponents";
-import { LabeledInput } from "../../components/LabeledInput/LabeledInput";
-import { Button } from "../../components/Button/Button";
-import {Title} from "../../components/Title/Title";
+import { LayoutComponents } from "../../components/Layouts";
+import { LabeledInput } from "../../components/Inputs";
+import { DefaultButton } from "../../components/Buttons";
+import { Title } from "../../components/Title";
 import { api } from "../../services/api";
 
 interface FormData {
@@ -173,7 +173,7 @@ export const Register = () => {
   };
 
   return (
-    <LayoutComponents>
+    <LayoutComponents withNavbar={true}>
       <form className="max-w-md mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
 
       <Title name="Cadastro"/>
@@ -301,7 +301,7 @@ export const Register = () => {
           minLength={6}
         />
 
-        <Button
+        <DefaultButton
           name="CRIAR CONTA"
           onClick={async (e) => {
             e.preventDefault();
