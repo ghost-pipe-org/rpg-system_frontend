@@ -105,77 +105,77 @@ export const Login = () => {
   else {
     return (
       <LayoutComponents withNavbar={true}>	
-        <form className="mx-auto p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
-          <Title name="Login" />
-  
-          {error && (
-            <div className="block text-base font-normal font text-red-500 mb-1 font-prompt">
-              {error}
-            </div>
-          )}
-  
-          <LabeledInput
-            id="email"
-            name="email"
-            label="Email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Insira seu@email.com"
-            required={true}
-            minLength={6}
-            onBlur={() => {
-              if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
-                setError("Email inválido");
-              }
-            }}
-          />
-  
-          <LabeledInput
-            id="password"
-            name="password"
-            label="Senha"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Insira sua senha"
-            required={true}
-            minLength={6}
-          />
-  
-          <DefaultButton
-            name="LOGIN"
-            onClick={async (e) => {
-              e.preventDefault();
-              await submitForm();
-            }}
-            type="submit"
-            isLoading={isSubmitting}
-            className="w-full justify-center mt-2 py-3"
-          />
-  
-          <div className="flex justify-center items-center mt-4">
-            <span className="text-sm text-[#adadad] leading-6 pr-1.5">
-              Não possuí uma conta?
-            </span>
-            <Link
-              to="/cadastro"
-              className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
-            >
-              Criar conta.
-            </Link>
-          </div>
+      <form className="mx-auto mb:min-w-[370px] p-6 bg-white/20 rounded-xl border-2 border-indigo-500 shadow-lg">
+        <Title name="Login" />
+    
+        {error && (
+        <div className="block text-base font-normal font text-red-500 mb-1 font-prompt">
+          {error}
+        </div>
+        )}
+    
+        <LabeledInput
+        id="email"
+        name="email"
+        label="Email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Insira seu@email.com"
+        required={true}
+        minLength={6}
+        onBlur={() => {
+          if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
+          setError("Email inválido");
+          }
+        }}
+        />
+    
+        <LabeledInput
+        id="password"
+        name="password"
+        label="Senha"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+        placeholder="Insira sua senha"
+        required={true}
+        minLength={6}
+        />
+    
+        <DefaultButton
+        name="LOGIN"
+        onClick={async (e) => {
+          e.preventDefault();
+          await submitForm();
+        }}
+        type="submit"
+        isLoading={isSubmitting}
+        className="w-full justify-center mt-2 py-3"
+        />
+    
+        <div className="flex justify-center items-center mt-4">
+        <span className="text-sm text-[#adadad] leading-6 pr-1.5">
+          Não possuí uma conta?
+        </span>
+        <Link
+          to="/cadastro"
+          className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
+        >
+          Criar conta.
+        </Link>
+        </div>
 
-          
-          <div className="flex justify-center items-center mt-1">
-            <Link
-              to="/admin"
-              className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
-            >
-              Acessar área administrativa.
-            </Link>
-          </div>
-        </form>
+        
+        <div className="flex justify-center items-center mt-1">
+        <Link
+          to="/admin"
+          className="text-sm text-indigo-400 hover:text-cyan-500 leading-6 no-underline"
+        >
+          Acessar área administrativa.
+        </Link>
+        </div>
+      </form>
       </LayoutComponents>
     );
   }
