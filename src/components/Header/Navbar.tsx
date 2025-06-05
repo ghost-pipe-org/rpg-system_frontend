@@ -48,34 +48,23 @@ export default function Navbar() {
       )}
 
       {/* Botão do menu mobile */}
-      <button
-        className="md:hidden"
-        aria-label="Abrir menu"
-        onClick={() => setMenuOpen((open) => !open)}
-      >
-        <img src="/menu.svg" alt="Menu Hamburguer" className="h-8" />
-      </button>
-
-      {/* Botão de login */}
       {!isAuthPage && (
-    <Link
-      to="/login"
-      className="hidden md:flex items-center justify-center px-4 py-1 bg-transparent border-2 border-[#11D0BB] hover:border-[#5439E0] font-normal rounded-md transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 font-prompt text-white no-underline"
-    >
-      Entrar
-    </Link>
+        <button
+          className="md:hidden"
+          aria-label="Abrir menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <img
+            src={menuOpen ? "/menu-opened.svg" : "/menu.svg"}
+            alt="Menu Hamburguer"
+            className="h-8"
+          />
+        </button>
       )}
 
       {/* Menu mobile */}
       {menuOpen && !isAuthPage && (
-        <div className="absolute top-full right-6 mt-2 bg-[#181824] border border-[#5439E0] rounded shadow-lg flex flex-col items-start p-4 z-50 min-w-[160px]">
-          <Link
-            to="/eventos"
-            className={navLinkClass}
-            onClick={() => setMenuOpen(false)}
-          >
-            eventos
-          </Link>
+        <div className="md:hidden absolute top-15 right-0 mt-2 bg-black border border-l-[#11D0BB] rounded-t-none shadow-lg flex flex-col items-center p-4 z-50 min-w-[160px]">
           <Link
             to="/"
             className={navLinkClass}
@@ -83,6 +72,15 @@ export default function Navbar() {
           >
             início
           </Link>
+          <div className="w-full h-px bg-[#231D31] my-2" />
+          <Link
+            to="/eventos"
+            className={navLinkClass}
+            onClick={() => setMenuOpen(false)}
+          >
+            eventos
+          </Link>
+          <div className="w-full h-px bg-[#231D31] my-2" />
           <Link
             to="/sessoes"
             className={navLinkClass}
@@ -90,7 +88,34 @@ export default function Navbar() {
           >
             sessões
           </Link>
+          <div className="w-full h-px bg-[#231D31] my-2" />
+          <div className="flex flex-col items-center pt-2 w-full">
+            <Link
+              to="/login"
+              className="flex items-center justify-center px-4 py-1 bg-transparent border-2 border-[#11D0BB] hover:bg-[#11D0BB] font-normal rounded-md transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 font-prompt text-white no-underline w-full mb-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              Entrar
+            </Link>
+            <span className="text-white mb-2">ou</span>
+            <Link
+              to="/cadastro"
+              className="flex items-center justify-center px-4 py-1 bg-transparent border-2 hover:bg-white hover:text-black border-[#5439E0] font-normal rounded-md transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 font-prompt text-white no-underline w-full"
+              onClick={() => setMenuOpen(false)}
+            >
+              Criar conta
+            </Link>
+          </div>
         </div>
+      )}
+
+      {!isAuthPage && (
+        <Link
+          to="/login"
+          className="hidden md:flex items-center justify-center px-4 py-1 bg-transparent border-2 border-[#11D0BB] hover:border-[#5439E0] font-normal rounded-md transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 font-prompt text-white no-underline"
+        >
+          Entrar
+        </Link>
       )}
     </nav>
   );
