@@ -3,19 +3,22 @@ import { LayoutComponents } from "../../components/Layouts";
 import { Title } from "../../components/Title";
 import { SessionCard } from "../../components/SessionCard";
 import { Link } from "react-router-dom";
+import { api } from "../../services/api";
+
 interface Session {
   id: string;
   title: string;
   system: string;
   period: "manha" | "tarde" | "noite";
   date?: Date | null;
-  possibledate: Date[]; // Make possibledate required
+  possibledate: Date[];
   description: string;
   master: string;
   room: string;
   slots: number;
   requirements: string;
   iconUrl?: string;
+  status?: string;
 }
 
 const mockAvailableSessions: Session[] = [

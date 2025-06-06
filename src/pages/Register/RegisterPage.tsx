@@ -4,6 +4,7 @@ import { LabeledInput } from "../../components/Inputs";
 import { DefaultButton } from "../../components/Buttons";
 import { Title } from "../../components/Title";
 import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
   username: string;
@@ -28,6 +29,7 @@ export const Register = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const formatPhoneNumber = useCallback((value: string): string => {
     const cleaned = value.replace(/\D/g, "");
@@ -126,7 +128,7 @@ export const Register = () => {
       password: user.password
     };
 
-    const response = await api.post("/players", userData);
+    const response = await api.post("/users", userData);
     if (response.status !== 201) {
       throw new Error("Erro ao salvar usuário");
     }
@@ -151,6 +153,7 @@ export const Register = () => {
       await handleSaveUser(formData);
 
       alert("Cadastro realizado com sucesso!");
+      navigate("/sessoes");
       
       setFormData({
         username: "",
