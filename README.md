@@ -44,6 +44,12 @@ http://localhost:3000
 
 - `npm run dev`: Inicia o servidor de desenvolvimento
 
+---
+
+## Documentação
+
+Para informações mais detalhadas sobre a aplicação, veja o arquivo [DOCUMENTATION](DOCUMENTATION).
+
 ## 📄 Licença
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
